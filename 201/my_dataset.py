@@ -1,5 +1,6 @@
 """
-Az feladat egy olyan osztaly letrehozsa, melyben mert adatok listajat tudjuk tarolni, illetve errol mindenfele "statisztikai" dolgot megmondani. Az egyszerueseg kedveert feltetelezzuk, hogy  mert adatok csak egeszek lesznek.
+Az feladat egy olyan osztaly letrehozsa, melyben mert adatok listajat tudjuk tarolni, illetve errol mindenfele "statisztikai" dolgot megmondani. Az egyszerueseg kedveert feltetelezzuk,
+ hogy  mert adatok csak egeszek lesznek.
 
 A tesztek az ebben a docstringben megadott peldakra mennek le.
 
@@ -22,7 +23,8 @@ Szekek szama irodakban
     5 | #####
     6 | #
 
-Ennek a fuggvenynek olyan kimenetet kell generalnia, hogy kiirja a dattaset nevet, alahuzza gondolatjelekkel, majd vegigmegy az ertekeken aa legkisebbtol a legnagyobbikig, es soronkent kiirja oket 5 karakter szelesen jobbra igazitva, majd egy elvalsazto resz, es utan annyi #, ahanyszor az az ertek elofordult.
+Ennek a fuggvenynek olyan kimenetet kell generalnia, hogy kiirja a dattaset nevet, alahuzza gondolatjelekkel, majd vegigmegy az ertekeken aa legkisebbtol a legnagyobbikig, es soronkent kiirja oket
+ 5 karakter szelesen jobbra igazitva, majd egy elvalsazto resz, es utan annyi #, ahanyszor az az ertek elofordult.
 
 
 Ha van olyan ertek, ami nem szerepelt egyszer sem, de benne van ebben az intervallumban, akkor is megjelenik, csak 0 db #-tel:
@@ -108,33 +110,104 @@ Felev vegi jegyek
     5 | #####
 """
 
-class DataSet:
 
-    def __init__(self, name) -> None:
-        pass
+
+class DataSet:
+    
+    
+    def __init__(self,name) -> None:
+        self. name = name
+        self.lista = []
     
     def record(self,data) -> None:
-        pass
+        self.lista.append(data)
+
     
     def average(self) -> float:
-        pass
+        count = 0
+        sum = 0
+        for i in self.lista:
+            sum +=i
+            count+=1
+        return sum / count
 
     def min(self) -> int:
-        pass
+        min = self.lista[0]
+        for i in self.lista:
+            if i < min:
+                min=i
+        return min
 
     def max(self) -> int:
-        pass
+        max = self.lista[0]
+        for i in self.lista:
+            if i > max:
+                max=i
+        return max
     
     def count(self,x) -> int:
-        pass
+        count = 0
+        for szamol in self.lista:
+            if szamol == x:
+                count+=1
+        return count
     
     def probability(self,x) -> float:
-        pass
+        count = self.count(x)
+        osszes = len(self.lista)
+        return count/osszes
+
+        
     
     def range(self) -> tuple:
-        pass
+        min = self.min()
+        max=self.max()
+        return(min,max)
 
+    def print_szamlalo(self) -> None:
+        for cc in self.lista:
+            self.szamlalo[cc] +=1
+
+
+    def print_lista(self):
+        for cc in self.lista:
+            print(cc, end=" , ")
+       
     def print_histogram(self) -> None:
-        pass
+        self.szamlalo = [0,0,0,0,0,0,0,0,0,0]
+        self.print_szamlalo()
+        print("Székek száma az irodában")
+        print("_ _ _ _ _ _ _ _ _ _ _ _")
+        sor = 0
+    
+        for cc in self.szamlalo:
+            i = 1
+            if cc !=0:
+
+                print(sor, end=" | ")
+                while i <=cc:
+                    print("#", end=" ")
+                    i+=1
+                print()
+            sor+=1
+        
+
+
+
+# ds=DataSet("Szekek szama irodakban")
+# for cc in [3,4,5,4,5,4,3,4,5,6,5,4,4,3,4,5]:
+    
+#     ds.record(cc)
+# ds.print_histogram()
+
+# print(ds.max())
+# print(ds.average()) 
+# print(ds.min())
+
+
+
+
+
+
 
 
