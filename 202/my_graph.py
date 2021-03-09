@@ -73,26 +73,62 @@ B-C
 
 """
 
+
+
 class Graph:
     
-    def __init__(self, vertices=[]):
-        pass
+
     
-    def has_vertex(self, vertex):
-        pass
+    def __init__(self, vertices=[]):
+        self.vertices = vertices
+        self.edges = []
+        self.g = {}
+    
+    def has_vertex(self, vertex) ->bool:
+        return vertex in self.g
     
     def add_vertex(self, vertex):
-        pass
+        if vertex not in self.g:
+            self.g[vertex] = []
     
     def add_edge(self,vertex1,vertex2):
-        pass
+        if vertex1 in self.g:
+            self.g[vertex1].append(vertex2)
+        else:
+            self.g[vertex1] = [vertex2]
     
-    def has_edge(self,vertex1,vertex2):
-        pass
+    def has_Edge(self,vertex1,vertex2) -> bool:
+        return vertex2 in self.g[vertex1]
 
-    def d(self,vertex):
-        pass
-    
+    def d(self,vertex) -> int:
+        return len(self.g[vertex])
+        
     def get_subgraph(self,vertices):
-        pass
+        subgraph = Graph (vertices)
+        for x in vertices:
+            for y in vertices:
+                if self.has_Edge(x,y):
+                    subgraph.add_edge(x,y)
+        return subgraph
+
+
+
+# g = Graph(['A','B','C'])
+
+# g.add_edge("A","C")
+# g.add_edge("B","C")
+# g.add_edge("C","A")
+# g.add_edge("C","B")
+
+
+# g1=g.get_subgraph({'A','C'})
+
+
+# print(g.vertices)
+# print(g.g)
+# print(g.d("C"))
+
+
+
+
     
